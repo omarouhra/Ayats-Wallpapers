@@ -1,6 +1,9 @@
 import Head from "next/head";
+import BluryImage from "../components/core/BluryImage";
+import IconLink from "../components/core/IconLink";
 import Text from "../components/core/Text";
 import Title from "../components/core/Title";
+import Wallpaper from "../components/Wallpaper";
 const Home = () => {
 
   return (
@@ -32,7 +35,11 @@ const Home = () => {
 
         <section className="py-12">
 
-          <div>
+          <div className="grid grid-cols-1 md:grid-cols-2  gap-8 lg:gap-12">
+            { [1, 2, 3, 4, 5, 6].map((element, index) => (
+              <Wallpaper key={ index } />
+            )) }
+
 
           </div>
 

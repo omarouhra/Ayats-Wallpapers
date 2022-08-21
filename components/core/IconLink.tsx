@@ -4,15 +4,16 @@ import Link from 'next/link'
 type LinkType = {
     label: string;
     href?: string;
+    className?: string;
 }
 
-function IconLink({ label, href }: LinkType) {
+function IconLink({ label, href, className }: LinkType) {
     return (
         <Link href='/' >
             < a >
-                <div className='hover:underline'>
+                <div className={ className }>
                     <span>
-                        { label } `{ '>' }`
+                        { label } { '>' }
                     </span>
                 </div>
             </ a>
