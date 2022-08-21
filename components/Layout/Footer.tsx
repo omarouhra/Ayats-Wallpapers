@@ -7,9 +7,9 @@ import IconLink from "../core/IconLink";
 
 function Footer() {
   return (
-    <footer className='py-16 flex items-center justify-between' >
+    <footer className='py-16 flex flex-col md:flex-row items-center justify-between space-y-12 md:space-y-0' >
       {/* <Title title="Contact" /> */ }
-      <div className="flex space-x-4 items-center justify-center">
+      <div className="flex space-x-4 items-center  md:justify-center">
         <div className="relative w-[70px] h-[70px] shadow bg-gray-100 dark:bg-white rounded-md ">
           <BluryImage imgSrc={ developer } alt='developer Omar Ouhra' />
         </div>
@@ -19,7 +19,7 @@ function Footer() {
         </div>
       </div>
 
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 justify-between w-full max-w-xs md:justify-center">
         <IconLink label="Github" />
         <IconLink label="Twitter" />
         <IconLink label="Linkedin" />
