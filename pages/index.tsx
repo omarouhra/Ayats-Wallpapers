@@ -32,6 +32,10 @@ const Home = () => {
 
         <section className="py-12">
 
+          <div>
+
+          </div>
+
         </section>
       </main>
     </div >
