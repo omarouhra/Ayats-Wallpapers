@@ -5,13 +5,8 @@ import MoonIcon from "../icons/MoonIcon";
 import SunIcon from "../icons/SunIcon";
 
 function Header() {
-  const [mounted, setMounted] = useState(false);
-
   const { resolvedTheme, theme, setTheme } = useTheme();
 
-  useEffect(() => setMounted(true), []);
-
-  if (!mounted) return null;
 
   return (
     <header className='py-8'>
