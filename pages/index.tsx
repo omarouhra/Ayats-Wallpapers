@@ -1,10 +1,5 @@
 import Head from "next/head";
-import MoonIcon from "../components/icons/MoonIcon";
-import SunIcon from "../components/icons/SunIcon";
-import { useTheme } from "next-themes";
-
 const Home = () => {
-  const { resolvedTheme, theme, setTheme } = useTheme();
 
   return (
     <div className='px-10'>
@@ -18,6 +13,7 @@ const Home = () => {
       </Head>
       <main className='flex items-center justify-center'>
         <h1 className='text-3xl font-bold'>Ayats Wallpapers 🕋</h1>
+        <p className="font-amiri">وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مَخْرَجًۭا وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ </p>
       </main>
     </div>
   );

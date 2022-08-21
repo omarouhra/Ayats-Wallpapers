@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { useTheme } from "next-themes";
 import MoonIcon from "../icons/MoonIcon";
 import SunIcon from "../icons/SunIcon";
+import Logo from "../Logo";
 
 function Header() {
   const [mounted, setMounted] = useState(false);
@@ -15,7 +15,8 @@ function Header() {
 
   return (
     <header className='py-8'>
-      <div className='flex items-center justify-end'>
+      <div className='flex items-center justify-between'>
+        <Logo />
 
         <button
           onClick={ () => {
