@@ -1,17 +1,21 @@
 import React from 'react'
 import BluryImage from './core/BluryImage'
-import IconLink from './core/IconLink'
-import v1 from '../public/wallpapers/v1.png'
+import preview1 from '../public/preview/preview-1.png'
+import Link from 'next/link'
 
 
 function Wallpaper() {
     return (
-        <div className=' flex flex-col space-y-4 group transition duration-300'>
-            <div className="w-full md:max-w-[400px] h-[250px] hover:shadow-xl hover:scale-[1.01] ">
-                <BluryImage imgSrc={ v1 } alt='v1-pic' className='rounded-md ' />
-            </div>
-            <IconLink label="Download" className='group-hover:translate-x-1 group-hover:font-semibold transition duration-200' />
-        </div>
+        <Link href='/' >
+            <a className=' flex flex-col space-y-4 group '>
+                <div className="w-full md:max-w-[400px] h-[250px] hover:shadow-xl hover:scale-[1.01] transition duration-300 ">
+                    <BluryImage imgSrc={ preview1 } alt='v1-pic' className='rounded-md ' />
+                </div>
+                <span className='group-hover:translate-x-1 group-hover:font-semibold transition duration-200'>
+                    Download { '>' }
+                </span>
+            </a>
+        </Link >
     )
 }
 
