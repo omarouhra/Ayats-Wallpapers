@@ -34,15 +34,19 @@ const Home = () => {
         </section>
 
         <section className="py-12">
-
-          <div className="grid grid-cols-1 md:grid-cols-2  gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2  gap-8 lg:gap-12 justify-items-center ">
             { [1, 2, 3, 4, 5, 6].map((element, index) => (
               <Wallpaper key={ index } />
             )) }
-
-
           </div>
+        </section>
 
+        <hr className="border my-8" />
+
+
+        <section className="py-12">
+          <Title title="Contributions" />
+          <Text text="For any suggestions or bugs reporting! Check the Github repository. Thanks " />
         </section>
       </main>
     </div >

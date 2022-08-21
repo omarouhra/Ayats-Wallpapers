@@ -11,9 +11,9 @@ function IconLink({ label, href, className }: LinkType) {
     return (
         <Link href='/' >
             < a >
-                <div className={ className }>
+                <div className='text-gray-400 font-light hover:text-black dark:text-gray-200 dark:hover:text-white'>
                     <span>
-                        { label } { '>' }
+                        { label }
                     </span>
                 </div>
             </ a>
