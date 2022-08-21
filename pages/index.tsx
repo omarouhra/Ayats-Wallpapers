@@ -21,6 +21,18 @@ const Home = () => {
             Choose your prefered Aya  🕌
           </button>
         </section>
+
+        <section className="py-12">
+          <Title title="Aya 1-2, Chapter Al-Talaq" />
+          <div className="space-y-6 mt-8">
+            <p className="font-amiri text-md md:text-xl text-gray-400 dark:text-gray-100 text-right">وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مَخْرَجًۭا وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ</p>
+            <Text text="And whoever is mindful of Allah, He will make a way out for them, and provide for them from sources they could never imagine." />
+          </div>
+        </section>
+
+        <section className="py-12">
+
+        </section>
       </main>
     </div >
   );
