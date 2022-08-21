@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import Logo from "../Logo";
 import MoonIcon from "../icons/MoonIcon";
 import SunIcon from "../icons/SunIcon";
-import Logo from "../Logo";
 
 function Header() {
   const [mounted, setMounted] = useState(false);
@@ -17,7 +17,6 @@ function Header() {
     <header className='py-8'>
       <div className='flex items-center justify-between'>
         <Logo />
-
         <button
           onClick={ () => {
             setTheme(resolvedTheme === "light" ? "dark" : "light");
