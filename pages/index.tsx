@@ -23,7 +23,7 @@ const Home = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Modal showModal={ showModal } setShowModal={ setShowModal }>
-        <div className='inline-block w-full  space-y-6 max-w-5xl py-8 px-5 overflow-hidden text-center align-middle transition-all bg-white dark:bg-black shadow-xl rounded-lg'>
+        <div className='inline-block w-full  space-y-6 max-w-3xl py-8 px-5 overflow-hidden text-center align-middle transition-all bg-white dark:bg-black shadow-xl rounded-lg'>
 
           { VERSES.map(({ source, verseAr, verseEn }, index) => (
             <VerseButton
@@ -51,11 +51,11 @@ const Home = () => {
           </button>
         </section>
 
-        <section className="py-12">
-          <Title title="Aya 1-2, Chapter Al-Talaq" />
+        <section className="pt-12 h-[200px] md:h-[250px] ">
+          <Title title={ VERSES[activeVerse].source } />
           <div className="space-y-6 mt-8">
-            <p className="font-amiri text-md md:text-xl text-gray-400 dark:text-gray-100 text-right">وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مَخْرَجًۭا وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ</p>
-            <Text text="And whoever is mindful of Allah, He will make a way out for them, and provide for them from sources they could never imagine." />
+            <p className="font-amiri text-md md:text-xl text-gray-400 dark:text-gray-100 text-right">{ VERSES[activeVerse].verseAr }</p>
+            <Text text={ VERSES[activeVerse].verseEn } />
           </div>
         </section>
 
