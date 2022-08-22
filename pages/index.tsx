@@ -7,9 +7,11 @@ import Title from "../components/core/Title";
 import VerseButton from "../components/Layout/VerseButton";
 import Modal from "../components/Modal";
 import Wallpaper from "../components/Wallpaper";
+import { VERSES } from '../data/verses'
+
 const Home = () => {
   const [showModal, setShowModal] = useState(false)
-  const [activeVerse, setActiveVerse] = useState(true)
+  const [activeVerse, setActiveVerse] = useState(0)
   return (
     <div>
       <Head>
@@ -21,15 +23,21 @@ const Home = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Modal showModal={ showModal } setShowModal={ setShowModal }>
-        <div className='inline-block w-full h-[500px] max-w-5xl pt-8 px-5 overflow-hidden text-center align-middle transition-all bg-white shadow-xl rounded-lg'>
+        <div className='inline-block w-full  space-y-6 max-w-5xl py-8 px-5 overflow-hidden text-center align-middle transition-all bg-white shadow-xl rounded-lg'>
 
-          <VerseButton
-            source="Aya 1-2, Chapter Al-Talaq"
-            verseAr="وَمَن يَتَّقِ ٱللَّهَ يَجْعَل لَّهُۥ مَخْرَجًۭا وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ"
-            verseEn="And whoever is mindful of Allah, He will make a way out for them, and provide for them from sources they could never imagine."
-            closeModal={ setShowModal }
-            activeVerse={ activeVerse }
-          />
+          { VERSES.map(({ source, verseAr, verseEn }, index) => (
+            <VerseButton
+              key={ index }
+              source={ source }
+              verseAr={ verseAr }
+              verseEn={ verseEn }
+              index={ index }
+              closeModal={ setShowModal }
+              activeVerse={ activeVerse }
+              setVerse={ setActiveVerse }
+            />
+          )) }
+
         </div>
       </Modal>
       <main>
