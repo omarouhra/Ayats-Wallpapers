@@ -23,7 +23,7 @@ const Home = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Modal showModal={ showModal } setShowModal={ setShowModal }>
-        <div className='inline-block w-full  space-y-6 max-w-5xl py-8 px-5 overflow-hidden text-center align-middle transition-all bg-white shadow-xl rounded-lg'>
+        <div className='inline-block w-full  space-y-6 max-w-5xl py-8 px-5 overflow-hidden text-center align-middle transition-all bg-white dark:bg-black shadow-xl rounded-lg'>
 
           { VERSES.map(({ source, verseAr, verseEn }, index) => (
             <VerseButton
