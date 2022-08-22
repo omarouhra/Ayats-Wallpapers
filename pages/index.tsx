@@ -8,6 +8,7 @@ import VerseButton from "../components/Layout/VerseButton";
 import Modal from "../components/Modal";
 import Wallpaper from "../components/Wallpaper";
 import { VERSES } from '../data/verses'
+import { WALLPAPERS } from '../data/wallpapers'
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false)
@@ -61,8 +62,8 @@ const Home = () => {
 
         <section className="py-12">
           <div className="grid grid-cols-1 md:grid-cols-2  gap-8 lg:gap-12 justify-items-center ">
-            { [1, 2, 3, 4, 5, 6].map((element, index) => (
-              <Wallpaper key={ index } />
+            { WALLPAPERS.map(({ src, alt }, index) => (
+              <Wallpaper key={ index } imgSrc={ src } alt={ alt } />
             )) }
           </div>
         </section>
