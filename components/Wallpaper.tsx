@@ -11,8 +11,8 @@ function Wallpaper() {
                 <div className="w-full  h-[250px] hover:shadow-xl hover:scale-[1.01] transition duration-300 ">
                     <BluryImage imgSrc={ preview1 } alt='v1-pic' className='rounded-md ' />
                 </div>
-                <span className='group-hover:translate-x-1 group-hover:font-semibold transition duration-200'>
-                    Download { '>' }
+                <span className='md:opacity-0 md:oapcity-100 group-hover:md:opacity-100 group-hover:translate-x-1 font-semibold transition duration-200'>
+                    Download
                 </span>
             </a>
         </Link >

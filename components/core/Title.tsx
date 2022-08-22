@@ -7,7 +7,7 @@ type TitleType = {
 function Title({ title }: TitleType) {
 
     return (
-        <h2 className="text-xl md:text-2xl  mb-3 font-normal text-gray-900 dark:text-gray-100"
+        <h2 className="text-xl md:text-2xl  mb-3 font-normal text-gray-700 dark:text-gray-100"
         >{ title }</h2>
     )
 
