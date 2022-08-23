@@ -92,22 +92,14 @@ const Home = () => {
           </div>
         </section>
 
-        <motion.section
-          initial={ {
-            opacity: 0,
-            y: 800,
-          } }
-          animate={ {
-            opacity: 1,
-            y: 0
-          } }
+        <section
           className="py-12">
           <div className="grid grid-cols-1 md:grid-cols-2  gap-8 lg:gap-12 justify-items-center ">
             { WALLPAPERS[activeVerse].map(({ src, alt }, index) => (
               <Wallpaper key={ index } imgSrc={ src } alt={ alt } activeVerse={ activeVerse + 1 } ayaData={ data && data } />
             )) }
           </div>
-        </motion.section>
+        </section>
 
         <hr className="border my-8" />
 
