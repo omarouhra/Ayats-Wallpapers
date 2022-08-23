@@ -15,9 +15,12 @@ type ImageProps = {
 function Wallpaper({ imgSrc, alt, activeVerse, ayaData }: ImageProps) {
     const { mutate } = useSWRConfig();
 
+
+
     const [replay, setReplay] = useState(false)
     const ayaId = alt + '-v' + activeVerse
-    const data = ayaData?.filter(data => data.id === ayaId);
+    // @ts-ignore
+    const data: any = ayaData?.filter(data => data.id === ayaId);
 
     const downloadWalpaper = async () => {
         try {
@@ -46,8 +49,6 @@ function Wallpaper({ imgSrc, alt, activeVerse, ayaData }: ImageProps) {
     }
 
 
-    console.log(replay)
-
 
     return (
         <a download='wallpaper' href={ `/wallpapers/${alt}-v${activeVerse}.zip` } className=' group  w-full  flex flex-col space-y-4 group '>
@@ -61,6 +62,7 @@ function Wallpaper({ imgSrc, alt, activeVerse, ayaData }: ImageProps) {
             <div className='flex items-center justify-end space-x-2'>
 
                 <DownloadIcon />
+
                 <span className={ `bg-gray-300 dark:text-black p-2 rounded-md text-xs font-semibold   transition duration-400 ${replay && 'bg-[#04ade0] text-white scale-[1.3] translate-y-3 '} ` } > { data && data[0]?.downloads } </span>
 
             </div>
