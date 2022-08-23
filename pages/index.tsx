@@ -17,10 +17,16 @@ import useSWR from "swr";
 const Home = () => {
   const [showModal, setShowModal] = useState(false)
   const [activeVerse, setActiveVerse] = useState(0)
+  const [replay, setReplay] = useState(false)
 
 
+  const updateAnimation = () => {
+    setReplay(true)
+    setTimeout(() => {
+      setReplay(false)
+    }, 500);
 
-
+  }
 
   // Async functions
   const getWallpapers = async () => {
@@ -68,6 +74,7 @@ const Home = () => {
               closeModal={ setShowModal }
               activeVerse={ activeVerse }
               setVerse={ setActiveVerse }
+              setReplay={ updateAnimation }
             />
           )) }
 
@@ -93,7 +100,7 @@ const Home = () => {
         </section>
 
         <section
-          className="py-12">
+          className={ `py-12  ${replay && 'animate-fade-in-up'}` }>
           <div className="grid grid-cols-1 md:grid-cols-2  gap-8 lg:gap-12 justify-items-center ">
             { WALLPAPERS[activeVerse].map(({ src, alt }, index) => (
               <Wallpaper key={ index } imgSrc={ src } alt={ alt } activeVerse={ activeVerse + 1 } ayaData={ data && data } />
