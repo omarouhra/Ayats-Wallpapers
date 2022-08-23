@@ -4,6 +4,7 @@
 - Tailwind.css 
 - TypeScript
 - Next-themes
+- Swr
 - Prisma
 - PlanetScale
 - Vercel
