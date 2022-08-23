@@ -24,7 +24,7 @@ const Home = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Modal showModal={ showModal } setShowModal={ setShowModal }>
-        <div className='inline-block w-full  space-y-6 max-w-3xl py-8 px-5 overflow-hidden text-center align-middle transition-all bg-white dark:bg-black shadow-xl rounded-lg'>
+        <div className='inline-block w-full my-12  space-y-6 max-w-3xl py-8 px-5  overflow-hidden text-center align-middle transition-all bg-white dark:bg-[#023E51] shadow-xl rounded-lg'>
 
           { VERSES.map(({ source, verseAr, verseEn }, index) => (
             <VerseButton
@@ -63,7 +63,7 @@ const Home = () => {
         <section className="py-12">
           <div className="grid grid-cols-1 md:grid-cols-2  gap-8 lg:gap-12 justify-items-center ">
             { WALLPAPERS.map(({ src, alt }, index) => (
-              <Wallpaper key={ index } imgSrc={ src } alt={ alt } />
+              <Wallpaper key={ index } imgSrc={ src } alt={ alt } activeVerse={ activeVerse } />
             )) }
           </div>
         </section>
