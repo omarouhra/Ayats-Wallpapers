@@ -11,18 +11,18 @@ const VERSES = [
     verseAr: "لَا تَحْزَنْ إِنَّ ٱللَّهَ مَعَنَا",
     verseEn: "Do not worry; Allah is certainly with us.",
   },
-  {
-    source: "Aya 58, Chapter Al-Furqan",
-    verseAr:
-      "وَتَوَكَّلْ عَلَى ٱلْحَىِّ ٱلَّذِى لَا يَمُوتُ وَسَبِّحْ بِحَمْدِهِۦ ۚ وَكَفَىٰ بِهِۦ بِذُنُوبِ عِبَادِهِۦ خَبِيرًا",
-    verseEn:
-      "Put your trust in the Ever-Living, Who never dies, and glorify His praises. Sufficient is He as All-Aware of the sins of His servants.",
-  },
-  {
-    source: "Aya 5, Chapter Ash-Sharh",
-    verseAr: "فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا",
-    verseEn: "So, surely with hardship comes ease.",
-  },
+  // {
+  //   source: "Aya 58, Chapter Al-Furqan",
+  //   verseAr:
+  //     "وَتَوَكَّلْ عَلَى ٱلْحَىِّ ٱلَّذِى لَا يَمُوتُ وَسَبِّحْ بِحَمْدِهِۦ ۚ وَكَفَىٰ بِهِۦ بِذُنُوبِ عِبَادِهِۦ خَبِيرًا",
+  //   verseEn:
+  //     "Put your trust in the Ever-Living, Who never dies, and glorify His praises. Sufficient is He as All-Aware of the sins of His servants.",
+  // },
+  // {
+  //   source: "Aya 5, Chapter Ash-Sharh",
+  //   verseAr: "فَإِنَّ مَعَ ٱلْعُسْرِ يُسْرًا",
+  //   verseEn: "So, surely with hardship comes ease.",
+  // },
 ];
 
 export { VERSES };
