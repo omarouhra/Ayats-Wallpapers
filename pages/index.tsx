@@ -10,6 +10,7 @@ import Wallpaper from "../components/Wallpaper";
 import { VERSES } from '../data/verses'
 import { WALLPAPERS } from '../data/wallpapers'
 import { motion } from 'framer-motion'
+import { Prisma } from "@prisma/client";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false)
@@ -91,3 +92,12 @@ const Home = () => {
 };
 
 export default Home;
+
+
+export async function getServerSideProps() {
+
+  const Downloads = Prisma
+  return {
+    props: {}, // will be passed to the page component as props
+  }
+}
