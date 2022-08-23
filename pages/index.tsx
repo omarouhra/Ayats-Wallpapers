@@ -9,6 +9,7 @@ import Modal from "../components/Modal";
 import Wallpaper from "../components/Wallpaper";
 import { VERSES } from '../data/verses'
 import { WALLPAPERS } from '../data/wallpapers'
+import { motion } from 'framer-motion'
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false)
@@ -55,18 +56,27 @@ const Home = () => {
         <section className="pt-12 h-[200px] md:h-[250px] ">
           <Title title={ VERSES[activeVerse].source } />
           <div className="space-y-6 mt-8">
-            <p className="font-amiri text-md md:text-xl text-gray-400 dark:text-gray-100 text-right">{ VERSES[activeVerse].verseAr }</p>
+            <p className="font-amiri text-md md:text-xl text-black dark:text-gray-300 text-right">{ VERSES[activeVerse].verseAr }</p>
             <Text text={ VERSES[activeVerse].verseEn } />
           </div>
         </section>
 
-        <section className="py-12">
+        <motion.section
+          initial={ {
+            opacity: 0,
+            y: 800,
+          } }
+          animate={ {
+            opacity: 1,
+            y: 0
+          } }
+          className="py-12">
           <div className="grid grid-cols-1 md:grid-cols-2  gap-8 lg:gap-12 justify-items-center ">
-            { WALLPAPERS.map(({ src, alt }, index) => (
+            { WALLPAPERS[activeVerse].map(({ src, alt }, index) => (
               <Wallpaper key={ index } imgSrc={ src } alt={ alt } activeVerse={ activeVerse } />
             )) }
           </div>
-        </section>
+        </motion.section>
 
         <hr className="border my-8" />
 
