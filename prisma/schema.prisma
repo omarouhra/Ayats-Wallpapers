@@ -14,5 +14,5 @@ datasource db {
 
 model Wallpaper {
   id        String @id
-  Downloads Int
+  downloads Int
 }

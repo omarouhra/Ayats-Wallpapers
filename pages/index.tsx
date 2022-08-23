@@ -10,11 +10,41 @@ import Wallpaper from "../components/Wallpaper";
 import { VERSES } from '../data/verses'
 import { WALLPAPERS } from '../data/wallpapers'
 import { motion } from 'framer-motion'
-import { Prisma } from "@prisma/client";
+import prisma from "../lib/prisma";
+import useSWR from "swr";
+
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false)
   const [activeVerse, setActiveVerse] = useState(0)
+
+
+
+
+
+  // Async functions
+  const getWallpapers = async () => {
+    try {
+      const response = await fetch("/api/wallpaper", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (response.ok) {
+
+        return await response.json();
+      }
+    } catch (error) {
+
+      console.log("there was an error submitting", error);
+    }
+  };
+
+
+  // SWR
+  const { data } = useSWR(`/api/wallpaper`, getWallpapers);
+  //  @ts-ignore
+  // console.log("This is the data", downloads)
   return (
     <div>
       <Head>
@@ -74,7 +104,7 @@ const Home = () => {
           className="py-12">
           <div className="grid grid-cols-1 md:grid-cols-2  gap-8 lg:gap-12 justify-items-center ">
             { WALLPAPERS[activeVerse].map(({ src, alt }, index) => (
-              <Wallpaper key={ index } imgSrc={ src } alt={ alt } activeVerse={ activeVerse } />
+              <Wallpaper key={ index } imgSrc={ src } alt={ alt } activeVerse={ activeVerse + 1 } ayaData={ data && data } />
             )) }
           </div>
         </motion.section>
@@ -92,12 +122,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-export async function getServerSideProps() {
-
-  const Downloads = Prisma
-  return {
-    props: {}, // will be passed to the page component as props
-  }
-}

@@ -1,10 +1,10 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, ReactNode } from "react";
+import { Dispatch, Fragment, SetStateAction } from "react";
 
 interface ModalProps {
     children: any;
     showModal: boolean;
-    setShowModal: (state: boolean) => void;
+    setShowModal: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function Modal({
