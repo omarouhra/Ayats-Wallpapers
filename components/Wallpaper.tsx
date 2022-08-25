@@ -75,7 +75,6 @@ function Wallpaper({ imgSrc, alt, ayaData }: ImageProps) {
                             <a onClick={ () => {
                                 downloadWalpaper()
                                 updateAnimation()
-
                                 setTimeout(() => {
                                     setShowPreviewModal(false)
                                 }, 3000);
@@ -90,7 +89,7 @@ function Wallpaper({ imgSrc, alt, ayaData }: ImageProps) {
                             </a>
 
                             <div className='flex space-x-4 items-center'>
-                                <span className={ ` dark:text-white  text-xs font-semibold p-2 rounded-md  transition duration-400 ${replay && 'bg-[#04ade0] text-white scale-[1.1]'} ` } > { data && data[0]?.downloads } downloads </span>
+                                <span className={ ` dark:text-white  text-xs font-semibold p-2 rounded-md  transition duration-400 ${replay && 'scale-[1.2]'} ` } > { data && data[0]?.downloads } downloads </span>
                             </div>
 
                         </div>
