@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import BluryImage from './core/BluryImage'
 import Image, { StaticImageData } from 'next/image';
-import DownloadIcon from './DownloadIcon';
+import DownloadIcon from './icons/DownloadIcon';
 import { useSWRConfig } from 'swr';
 import Modal from './Modal';
 // import useSWR from "swr";
@@ -17,9 +17,6 @@ function Wallpaper({ imgSrc, alt, ayaData }: ImageProps) {
     const { mutate } = useSWRConfig();
 
     const [showPreviewModal, setShowPreviewModal] = useState(false)
-
-
-
 
     const [replay, setReplay] = useState(false)
     // @ts-ignore

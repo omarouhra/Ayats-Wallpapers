@@ -10,6 +10,7 @@ import Wallpaper from "../components/Wallpaper";
 import { VERSES } from '../data/verses'
 import { WALLPAPERS } from '../data/wallpapers'
 import useSWR from "swr";
+import { LinkedinShare, TwitterShare } from "../components/Share";
 
 
 const Home = () => {
@@ -105,9 +106,20 @@ const Home = () => {
         <hr className="border my-8" />
 
         <section className="py-12">
+          <Title title="Share the app" />
+          <Text text="Let your friends know about Ayats Wallpaper App!" />
+          <div className="flex items-center  space-x-4">
+
+            <TwitterShare />
+            <LinkedinShare />
+          </div>
+        </section>
+
+        <section className="py-12">
           <Title title="Contributions" />
           <Text text="For any suggestions or bugs reporting! Check the Github repository. Thanks " />
         </section>
+
       </main>
     </div >
   );
