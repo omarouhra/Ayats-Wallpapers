@@ -59,7 +59,7 @@ function Wallpaper({ imgSrc, alt, ayaData }: ImageProps) {
             <div onClick={ () => {
                 setShowPreviewModal(true)
 
-            } } className="w-full  h-[250px] hover:shadow-xl hover:scale-[1.01] transition duration-300 ">
+            } } className="w-full  h-[250px] hover:shadow-2xl hover:scale-[1.01] dark:shadow-cyan-500/50 rounded-md transition duration-300 ">
                 <BluryImage imgSrc={ imgSrc } alt={ alt } className='rounded-md ' />
             </div>
 
@@ -90,7 +90,7 @@ function Wallpaper({ imgSrc, alt, ayaData }: ImageProps) {
                             </a>
 
                             <div className='flex space-x-4 items-center'>
-                                <span className={ `bg-gray-300 dark:text-black p-2 rounded-md text-xs font-semibold   transition duration-400 ${replay && 'bg-[#04ade0] text-white scale-[1.3] translate-y-3 '} ` } > { data && data[0]?.downloads } download </span>
+                                <span className={ ` dark:text-white  text-xs font-semibold p-2 rounded-md  transition duration-400 ${replay && 'bg-[#04ade0] text-white scale-[1.1]'} ` } > { data && data[0]?.downloads } downloads </span>
                             </div>
 
                         </div>
