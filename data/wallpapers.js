@@ -15,53 +15,53 @@ const WALLPAPERS = [
   [
     {
       src: p1v1,
-      alt: "w1",
+      alt: "w1-v1",
     },
     {
       src: p2v1,
-      alt: "w2",
+      alt: "w2-v1",
     },
     {
       src: p3v1,
-      alt: "w3",
+      alt: "w3-v1",
     },
     {
       src: p4v1,
-      alt: "w4",
+      alt: "w4-v1",
     },
     {
       src: p5v1,
-      alt: "w5",
+      alt: "w5-v1",
     },
     {
       src: p6v1,
-      alt: "w6",
+      alt: "w6-v1",
     },
   ],
   [
     {
       src: p1v2,
-      alt: "w1",
+      alt: "w1-v2",
     },
     {
       src: p2v2,
-      alt: "w2",
+      alt: "w2-v2",
     },
     {
       src: p3v2,
-      alt: "w3",
+      alt: "w3-v2",
     },
     {
       src: p4v2,
-      alt: "w4",
+      alt: "w4-v2",
     },
     {
       src: p5v2,
-      alt: "w5",
+      alt: "w5-v2",
     },
     {
       src: p6v2,
-      alt: "w6",
+      alt: "w6-v2",
     },
   ],
 ];

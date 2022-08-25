@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import BluryImage from './core/BluryImage'
-import { StaticImageData } from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import DownloadIcon from './DownloadIcon';
 import { useSWRConfig } from 'swr';
+import Modal from './Modal';
 // import useSWR from "swr";
 
 type ImageProps = {
@@ -12,15 +13,17 @@ type ImageProps = {
     ayaData?: [],
 
 };
-function Wallpaper({ imgSrc, alt, activeVerse, ayaData }: ImageProps) {
+function Wallpaper({ imgSrc, alt, ayaData }: ImageProps) {
     const { mutate } = useSWRConfig();
+
+    const [showPreviewModal, setShowPreviewModal] = useState(false)
+
 
 
 
     const [replay, setReplay] = useState(false)
-    const ayaId = alt + '-v' + activeVerse
     // @ts-ignore
-    const data: any = ayaData?.filter(data => data.id === ayaId);
+    const data: any = ayaData?.filter(data => data.id === alt);
 
     const downloadWalpaper = async () => {
         try {
@@ -28,7 +31,7 @@ function Wallpaper({ imgSrc, alt, activeVerse, ayaData }: ImageProps) {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    id: ayaId
+                    id: alt,
                 }),
             });
             if (responce.ok) {
@@ -51,22 +54,45 @@ function Wallpaper({ imgSrc, alt, activeVerse, ayaData }: ImageProps) {
 
 
     return (
-        <a download='wallpaper' href={ `/wallpapers/${alt}-v${activeVerse}.zip` } className=' group  w-full  flex flex-col space-y-4 group '>
+        <>
+
             <div onClick={ () => {
-                downloadWalpaper()
-                updateAnimation()
+                setShowPreviewModal(true)
 
             } } className="w-full  h-[250px] hover:shadow-xl hover:scale-[1.01] transition duration-300 ">
                 <BluryImage imgSrc={ imgSrc } alt={ alt } className='rounded-md ' />
             </div>
-            <div className='flex items-center justify-end space-x-2'>
 
-                <DownloadIcon />
+            <Modal showModal={ showPreviewModal } setShowModal={ setShowPreviewModal }>
+                <div
+                    onClick={ () => {
+                        downloadWalpaper()
+                        updateAnimation()
 
-                <span className={ `bg-gray-300 dark:text-black p-2 rounded-md text-xs font-semibold   transition duration-400 ${replay && 'bg-[#04ade0] text-white scale-[1.3] translate-y-3 '} ` } > { data && data[0]?.downloads } </span>
+                        setTimeout(() => {
+                            setShowPreviewModal(false)
+                        }, 1000);
 
-            </div>
-        </a >
+                    } }
+                    className='inline-block w-full my-12  space-y-6 max-w-[1200px] py-8 px-5  overflow-hidden text-center align-middle transition-all bg-white dark:bg-[#023E51] shadow-xl rounded-lg'>
+
+                    <a download='wallpaper' href={ `/wallpapers/${alt}.zip` } className=' group  w-full  flex flex-col space-y-4 group transition duration-500 '>
+                        <Image src={ imgSrc } alt={ alt } className='rounded-md' />
+
+                        <div className='flex items-center justify-between space-x-2'>
+
+                            <span className=' dark:text-black group-hover:text-[#04ade0] group-hover:translate-x-2 tranistion duration-300'>Click to Downloads</span>
+                            <div className='flex space-x-4 items-center'>
+
+                                <DownloadIcon />
+                                <span className={ `bg-gray-300 dark:text-black p-2 rounded-md text-xs font-semibold   transition duration-400 ${replay && 'bg-[#04ade0] text-white scale-[1.3] translate-y-3 '} ` } > { data && data[0]?.downloads } </span>
+                            </div>
+
+                        </div>
+                    </a >
+                </div>
+            </Modal>
+        </>
     )
 }
 
