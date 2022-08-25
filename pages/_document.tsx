@@ -1,10 +1,11 @@
 import { Head, Html, Main, NextScript } from 'next/document';
 
+
+
 const Document = () => {
     return (
         <Html lang="en">
             <Head>
-                
                 <link
                     href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
                     rel="stylesheet"
@@ -28,7 +29,9 @@ const Document = () => {
                 />
                 <link rel="manifest" href="/site.webmanifest" />
                 <meta property="og:title" content="Ayats Wallpapers 🕋" />
-                <meta property="og:image" content='/preview/v1/p1.png' />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://ayats-wallpapers.vercel.app/" />
+                <meta property="og:image" content="https://ayats-wallpapers.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fp1.a8b413dd.png&w=3840&q=75" />
             </Head>
             <body className="font-poppins">
                 <Main />
