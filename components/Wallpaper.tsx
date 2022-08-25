@@ -65,15 +65,6 @@ function Wallpaper({ imgSrc, alt, ayaData }: ImageProps) {
 
             <Modal showModal={ showPreviewModal } setShowModal={ setShowPreviewModal }>
                 <div
-                    onClick={ () => {
-                        downloadWalpaper()
-                        updateAnimation()
-
-                        setTimeout(() => {
-                            setShowPreviewModal(false)
-                        }, 3000);
-
-                    } }
                     className='inline-block w-full my-12  space-y-6 max-w-[1200px] py-8 px-5  overflow-hidden text-center align-middle transition-all bg-white dark:bg-[#023E51] shadow-xl rounded-lg'>
 
                     <div className=' group  w-full  flex flex-col space-y-4 group transition duration-500 '>
@@ -81,7 +72,15 @@ function Wallpaper({ imgSrc, alt, ayaData }: ImageProps) {
 
                         <div className='flex items-center justify-between space-x-2'>
 
-                            <a download='wallpaper' href={ `/wallpapers/${alt}.zip` } className=' outline-none bg-gray-300 dark:text-black p-2 rounded-md text-xs font-semibold group-hover:text-[#04ade0]  tranistion duration-300'>
+                            <a onClick={ () => {
+                                downloadWalpaper()
+                                updateAnimation()
+
+                                setTimeout(() => {
+                                    setShowPreviewModal(false)
+                                }, 3000);
+
+                            } } download='wallpaper' href={ `/wallpapers/${alt}.zip` } className=' outline-none bg-gray-300 dark:text-black p-2 rounded-md text-xs font-semibold group-hover:text-[#04ade0]  tranistion duration-300'>
                                 <div className='flex items-center space-x-4'>
                                     <span>
                                         Click to Downloads
