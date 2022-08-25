@@ -10,7 +10,7 @@ import { WALLPAPERS } from '../data/wallpapers'
 import useSWR from "swr";
 import { LinkedinShare, TwitterShare } from "../components/Share";
 import pic from '../public/preview/v1/p1.png'
-import { NextSeo } from 'next-seo';
+
 
 
 
