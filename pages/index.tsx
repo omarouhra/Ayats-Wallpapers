@@ -77,7 +77,7 @@ const Home = () => {
       <main>
         <section className="py-12">
           <Title title="Make your wallpapers reminds you of god" />
-          <Text text="Donwload now any wallaper you like for free!" />
+          <Text text="Donwload now any wallapers(Laptop, Tablet and Phone) you like for free!" />
           <button
             onClick={ () => setShowVerseModal(true) }
             className="font-light border-[1.7px] rounded-sm dark:hover:text-black hover:text-white border-gray-900 dark:border-gray-200 py-2 px-5 hover:bg-gray-900 dark:hover:bg-gray-100 ">
