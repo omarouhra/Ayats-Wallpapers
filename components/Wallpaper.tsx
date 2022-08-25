@@ -91,7 +91,7 @@ function Wallpaper({ imgSrc, alt, ayaData }: ImageProps) {
                             </a>
 
                             <div className='flex space-x-4 items-center'>
-                                <span className={ `bg-gray-300 dark:text-black p-2 rounded-md text-xs font-semibold   transition duration-400 ${replay && 'bg-[#04ade0] text-white scale-[1.3] translate-y-3 '} ` } > { data && data[0]?.downloads } downloads </span>
+                                <span className={ `bg-gray-300 dark:text-black p-2 rounded-md text-xs font-semibold   transition duration-400 ${replay && 'bg-[#04ade0] text-white scale-[1.3] translate-y-3 '} ` } > { data && data[0]?.downloads } download </span>
                             </div>
 
                         </div>
