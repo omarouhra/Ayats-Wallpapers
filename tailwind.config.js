@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         amiri: ["Amiri", "Inter var", "sans-serif"],
+        poppins: ["'Poppins'", "sans-serif"],
       },
 
       keyframes: {

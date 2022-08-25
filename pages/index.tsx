@@ -1,7 +1,5 @@
 import Head from "next/head";
 import { useState } from "react";
-import BluryImage from "../components/core/BluryImage";
-import IconLink from "../components/core/IconLink";
 import Text from "../components/core/Text";
 import Title from "../components/core/Title";
 import VerseButton from "../components/Layout/VerseButton";
@@ -11,6 +9,9 @@ import { VERSES } from '../data/verses'
 import { WALLPAPERS } from '../data/wallpapers'
 import useSWR from "swr";
 import { LinkedinShare, TwitterShare } from "../components/Share";
+import pic from '../public/preview/v1/p1.png'
+import { NextSeo } from 'next-seo';
+
 
 
 const Home = () => {
@@ -47,15 +48,17 @@ const Home = () => {
   const { data } = useSWR(`/api/wallpaper`, getWallpapers);
 
   return (
-    <div>
+    <div className="font-poppins">
+
+
       <Head>
         <title>Ayats Wallpapers 🕋</title>
         <meta
           name='description'
           content='Ayats Walpaper app designed and built By @omar.ouhra'
         />
-        <link rel='icon' href='/favicon.ico' />
       </Head>
+
       <Modal showModal={ showVerseModal } setShowModal={ setShowVerseModal }>
         <div className='inline-block w-full my-12  space-y-6 max-w-3xl py-8 px-5  overflow-hidden text-center align-middle transition-all bg-white dark:bg-[#023E51] shadow-xl rounded-lg'>
 
