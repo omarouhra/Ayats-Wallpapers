@@ -31,7 +31,10 @@ const Document = () => {
                 <meta property="og:title" content="Ayats Wallpapers 🕋" />
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://ayats-wallpapers.vercel.app/" />
+                <meta name="twitter:card" content="summary_large_image" />
                 <meta property="og:image" content="https://ayats-wallpapers.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fp1.a8b413dd.png&w=3840&q=75" />
+                <meta property='og:image:width' content='1920' />
+                <meta property='og:image:height' content='1080' />
             </Head>
             <body className="font-poppins">
                 <Main />
