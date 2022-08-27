@@ -60,7 +60,7 @@ const Home = () => {
       </Head>
 
       <Modal showModal={ showVerseModal } setShowModal={ setShowVerseModal }>
-        <div className='inline-block w-full my-12  space-y-6 max-w-3xl py-8 px-5  overflow-hidden text-center align-middle transition-all bg-white dark:bg-[#023E51] shadow-xl rounded-lg'>
+        <div className='inline-block w-full my-12  space-y-6 max-w-3xl p-2 md:py-8 md:px-5  overflow-hidden text-center align-middle transition-all bg-white dark:bg-[#023E51] shadow-xl rounded-lg'>
 
           { VERSES.map(({ source, verseAr, verseEn }, index) => (
             <VerseButton
@@ -89,7 +89,7 @@ const Home = () => {
           </button>
         </section>
 
-        <section className="pt-12 h-[200px] md:h-[250px] ">
+        <section className="py-12 ">
           <Title title={ VERSES[activeVerse].source } />
           <div className="space-y-6 mt-8">
             <p className="font-amiri text-md md:text-xl text-black dark:text-gray-300 text-right">{ VERSES[activeVerse].verseAr }</p>
