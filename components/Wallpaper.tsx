@@ -62,7 +62,7 @@ function Wallpaper({ imgSrc, alt, ayaData }: ImageProps) {
 
             <Modal showModal={ showPreviewModal } setShowModal={ setShowPreviewModal }>
                 <div
-                    className='inline-block w-full my-12  space-y-6 max-w-[1200px] py-8 px-5  overflow-hidden text-center align-middle transition-all bg-white dark:bg-[#023E51] shadow-xl rounded-lg'>
+                    className='inline-block w-full my-12  space-y-6 max-w-[1200px] py-8 px-5  overflow-hidden text-center align-middle transition-all bg-white dark:bg-gray-900 shadow-xl rounded-lg'>
 
                     <div className=' group  w-full  flex flex-col space-y-4 group transition duration-500 '>
                         <Image src={ imgSrc } alt={ alt } className='rounded-md' />

@@ -110,9 +110,8 @@ const Home = () => {
 
         <section className="py-12">
           <Title title="Share the app" />
-          <Text text="Let your friends know about Ayats Wallpaper App!" />
+          <p className="text-gray-500 font-light dark:text-gray-200 mb-6">Let your friends know about Ayats Wallpaper App! </p>
           <div className="flex items-center  space-x-4">
-
             <TwitterShare />
             <LinkedinShare />
           </div>
@@ -120,9 +119,8 @@ const Home = () => {
 
         <section className="py-12">
           <Title title="Contributions" />
-          <Text text="For any suggestions or bugs reporting! Check the Github repository. Thanks " />
+          <p className="text-gray-500 font-light dark:text-gray-200">For any suggestions or bugs reporting! Check the <a target='_blank' rel="noreferrer" href="https://github.com/omarouhra/Ayats-Wallpapers" className="font-semibold hover:underline hover:text-blue-500">Github  repository</a>. Thanks </p>
         </section>
-
       </main>
     </div >
   );
