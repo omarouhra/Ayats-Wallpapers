@@ -33,6 +33,8 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+[preview](https://ayats.omarcode.me/)
+
 
 ## Copyrights
 Build By [Omar Ouhra](https://twitter.com/OuhraOmar) in 🇲🇦
