@@ -4,11 +4,11 @@ type VerseButtonType = {
     source: string,
     verseAr: string,
     verseEn: string,
-    index: number,
-    setVerse: Dispatch<SetStateAction<number>>,
+    index:string, // number,
+    setVerse: any, //Dispatch<SetStateAction<number>>,
     closeModal: Dispatch<SetStateAction<boolean>>,
     setReplay: () => void
-    activeVerse: number
+    activeVerse:string// number
 }
 
 
