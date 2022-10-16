@@ -1,5 +1,5 @@
 import Head from "next/head";
-import {createRef, useEffect, useState} from "react";
+import {createRef, ReactInstance, RefObject, useEffect, useState} from "react";
 import Text from "../components/core/Text";
 import Title from "../components/core/Title";
 import VerseButton from "../components/Layout/VerseButton";
@@ -17,7 +17,9 @@ import useSetSpecVerseNum from "../operations/useSetSpecVerseNum";
 import useSetSpecSuraNum from "../operations/useSetSpecSuraNum";
 import useSetSpecVerse from "../operations/useSetSpecVerse";
 
-import {exportComponentAsPNG} from "react-component-export-image";
+//import {exportComponentAsPNG} from "react-component-export-image";
+
+import dynamic from "next/dynamic";
 
 const Home = () => {
     //TODO reduce this file's size < 100 lines
@@ -30,7 +32,6 @@ const Home = () => {
         setTimeout(() => {
             setReplay(false)
         }, 500);
-
     }
 
     //Zustand implementation (https://github.com/pmndrs/zustand)
@@ -42,7 +43,7 @@ const Home = () => {
     const setSpecVerseNum = useSetSpecVerseNum()
     const setSpecSuraNum = useSetSpecSuraNum()
     const setSpecVerse = useSetSpecVerse()
-    let ref = createRef<null>()
+    let ref = createRef<any>()
 
     // Async functions
     const getWallpapers = async () => {
@@ -140,6 +141,21 @@ const Home = () => {
         }
     }, [specSuraNum, specVerseNum])
 
+    const [foo, setFoo] = useState<any>(() => () => {
+    });
+    useEffect(() => {
+        setFoo(() =>
+            async (ref: RefObject<ReactInstance>, specSuraNum: { toString: () => string; }, specVerseNum: { toString: () => string; }) => {
+                const exportComponentAsPNG = (await import('react-component-export-image')).exportComponentAsPNG
+                ref &&
+                exportComponentAsPNG(ref, {
+                    fileName: "Ayat Wallpaper " + specSuraNum?.toString() + " " + specVerseNum?.toString(),
+                }).catch(
+                    (err) => console.log(err)
+                )
+            })
+        return
+    }, [])
     return (
         <div className="font-poppins">
             <Head>
@@ -214,7 +230,7 @@ const Home = () => {
                             !specVerse ? (
                                     <div>{"Please specify a valid surah reference (e.g Sura :2 Aya :255)."}</div>) :
                                 (<>
-                                    <div ref={ref}>
+                                    <div>
                                         <div
                                             className={'font-amiri  text-md md:text-xl text-black dark:text-gray-300 text-center'}
                                             hidden={!specVerseNum}>
@@ -227,18 +243,26 @@ const Home = () => {
                                             {specVerse[specSuraNum + ":" + specVerseNum]?.verseEn}
                                         </div>
                                     </div>
+                                    <div ref={ref}
+                                         className={'-z-50 w-[1822px] h-[1336px] text-white font-amiri  text-[30px] text-center flex items-center flex-col justify-center bg-gradient-to-br from-violet-500 to-blue-50 '}>
+                                        <div
+                                            className={''}
+                                            hidden={!specVerseNum}>
+                                            {specVerse[specSuraNum + ":" + specVerseNum]?.verseAr}
+                                        </div>
+                                        <div
+                                            className={''}
+                                            hidden={!specVerseNum}>
+                                            {/*TODO add a spinner while loading*/}
+                                            {specVerse[specSuraNum + ":" + specVerseNum]?.verseEn}
+                                        </div>
+                                    </div>
 
                                     <div>
                                         <button
                                             className={"bg-blend-soft-light bg-pink-400 p-4 rounded-md hover:bg-pink-800 text-gray-800 hover:text-gray-200"}
                                             onClick={() => {
-                                                ref &&
-                                                exportComponentAsPNG(ref, {
-                                                    fileName: "Ayat Wallpaper " + specSuraNum?.toString() + " " + specVerseNum?.toString(),
-                                                    html2CanvasOptions: {backgroundColor: "red"}
-                                                }).catch(
-                                                    (err) => console.log(err)
-                                                )
+                                                foo(ref, specSuraNum, specVerseNum)
                                                 return
                                             }}>
                                             Generate Backgrounds
@@ -289,7 +313,8 @@ const Home = () => {
 
                 <section className="py-12">
                     <Title title="Share the app"/>
-                    <p className="text-gray-500 font-light dark:text-gray-200 mb-6">Let your friends know about Ayats
+                    <p className="text-gray-500 font-light dark:text-gray-200 mb-6">Let your friends know about
+                        Ayats
                         Wallpaper App! </p>
                     <div className="flex items-center  space-x-4">
                         <TwitterShare/>
@@ -299,15 +324,18 @@ const Home = () => {
 
                 <section className="py-12">
                     <Title title="Contributions"/>
-                    <p className="text-gray-500 font-light dark:text-gray-200">For any suggestions or bugs reporting!
+                    <p className="text-gray-500 font-light dark:text-gray-200">For any suggestions or bugs
+                        reporting!
                         Check the <a target='_blank' rel="noreferrer"
                                      href="https://github.com/omarouhra/Ayats-Wallpapers"
-                                     className="font-semibold hover:underline hover:text-blue-500">Github repository</a>.
+                                     className="font-semibold hover:underline hover:text-blue-500">Github
+                            repository</a>.
                         Thanks </p>
                 </section>
             </main>
         </div>
     );
-};
+}
 
-export default Home;
+
+export default dynamic(Promise.resolve(Home), {ssr: false});
