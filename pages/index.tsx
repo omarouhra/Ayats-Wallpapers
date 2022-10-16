@@ -19,6 +19,7 @@ import useSetSpecVerse from "../operations/useSetSpecVerse";
 
 const Home = () => {
     //TODO reduce this file's size
+    const metaDataURL = "https://api.alquran.cloud/v1/meta"
     const [showVerseModal, setShowVerseModal] = useState(false)
     const [showSpecVerseModal, setShowSpecVerseModal] = useState(false)
     const [activeVerseId, setActiveVerseId] = useState("999:1-2")//or any Aya, basically
@@ -65,10 +66,10 @@ const Home = () => {
             const notFound = (response.status > 399 && response.status < 500)//4xx
             if (ok) {
                 console.log(response.data?.result.translation)
-                const tafsirNumbersRegEx = new RegExp("(\\[[^a-z,A-Z]\])", "g")
+                const tafsirNumbersRegEx = new RegExp("(\\[[^a-z,A-Z]+\])", "g")
                 const ayatNumbersRegEx = /\(\d+\)/g
                 const dashesRegEx = /-/g
-                const formattedVerseEn = response.data?.result.translation.replace(tafsirNumbersRegEx, "").replace(ayatNumbersRegEx, "").replace(dashesRegEx, "").trim()
+                const formattedVerseEn = response.data?.result.translation.replaceAll(tafsirNumbersRegEx, "").replaceAll(ayatNumbersRegEx, "").replace(dashesRegEx, "").trim()
                 console.log(formattedVerseEn)
                 const newUpdatedVerse = {
                     [Object.keys(newVerse)[0]]: {
@@ -130,12 +131,32 @@ const Home = () => {
                 .then(
                     (newVerse) => {
                         newVerse && getEnVerse(specSuraNum, specVerseNum, newVerse)
-                            .then((r) => r && setSpecVerse(r)
-                            )
+                            .then((r) => r && setSpecVerse(r))
                     }
                 )
         }
     }, [specSuraNum, specVerseNum])
+
+    const [ayatsMeta, setAyatsMeta] = useState<Array<any>>([]);
+    const getSurahsMeta = async () => {
+        return axios.get(metaDataURL)
+            .then(r => r?.data?.data?.surahs?.references)
+            .catch(reason => {
+                console.log('Fetching Metadata from ' + metaDataURL + " failed: " + reason)
+            })
+    }
+    useEffect(() => {
+        getSurahsMeta().then(r => setAyatsMeta([...r]))
+    }, []);
+
+    function getArrayOfNumbersByRange(startNumber: number, endNumber: number) {
+        let rangeArray = []
+        for (let i = startNumber; i <= endNumber; i++) {
+            rangeArray.push(i)
+        }
+        console.log(rangeArray)
+        return rangeArray
+    }
 
     return (
         <div className="font-poppins overflow-hidden relative">
@@ -172,36 +193,38 @@ const Home = () => {
                     className='inline-block w-full my-12  space-y-6 max-w-3xl p-2 md:py-8 md:px-5 overflow-hidden text-center align-middle transition-all bg-white dark:bg-[#023E51] shadow-xl rounded-lg'>
                     <form className="grid grid-cols-1 md:grid-cols-2 gap-4 jutify-items-center py-4">
                         <label className="flex justify-center gap-5 w-full">
-                            <span className="w-1/3">Sura n°</span>
-                            <select className="w-1/3 text-center"
+                            <span className="w-1/5">Sura n°</span>
+                            <select className="w-3/5 text-center"
                                     defaultValue={specSuraNum ? specSuraNum.toString() : 'default'}
                                     onChange={(e) => {
                                         const val = (e.target.value !== "default") ? e.target.value : null;
                                         setSpecSuraNum(Number(e.target.value))
                                     }}
                             >
-                                <option value={'1'}>1</option>
-                                <option value={'2'}>2</option>
-                                <option value={'default'} disabled>...</option>
-                                <option value={'113'}>113</option>
-                                <option value={'114'}>114</option>
+                                <option value={"default"} disabled={true}>Sura N°</option>
+                                {ayatsMeta.map((value, index) =>
+                                    <option key={index} value={value.number?.toString()}>
+                                        <span>{value.number}.</span>
+                                        <span>&nbsp;&nbsp;</span>
+                                        <span className={''}>{value.englishName}</span>
+                                    </option>
+                                )}
                             </select>
                         </label>
                         <label className="flex justify-center gap-5 w-full">
-                            <span className="w-1/3">Aya n°</span>
-                            <select disabled={!specSuraNum} className="w-1/3 text-center"
-                                    defaultValue={specVerseNum ? specVerseNum.toString() : 'default'}
+                            <span className="w-1/5">Aya n°</span>
+                            <select disabled={!specSuraNum} className="w-3/5 text-center"
+                                    defaultValue={specVerseNum ? specVerseNum.toString() : "default"}
                                     onChange={(e) => {
                                         const val = (e.target.value !== "default") ? e.target.value : null;
                                         setSpecVerseNum(Number(val))
                                     }}
                             >
-                                <option value={'1'}>1</option>
-                                <option value={'2'}>2</option>
-                                <option value={'default'} disabled>...</option>
-                                {/*TODO: update depending on Sura using this API https://api.alquran.cloud/v1/meta*/}
-                                <option value={'99'}>Max-1</option>
-                                <option value={'100'}>Max</option>
+                                <option value={"default"} disabled={true}>Aya N°</option>
+                                {specSuraNum && ayatsMeta.length > 0 && getArrayOfNumbersByRange(1, ayatsMeta[specSuraNum - 1].numberOfAyahs)
+                                    .map((value, index) => {
+                                        return <option key={index} value={value}>{value}</option>
+                                    })}
                             </select>
                         </label>
                     </form>
@@ -226,7 +249,7 @@ const Home = () => {
                                     </div>
                                     <div>
                                         <button
-                                            className={"bg-blend-soft-light bg-pink-400 p-4 rounded-md hover:bg-pink-800 text-gray-800 hover:text-gray-200"}
+                                            className={"font-light border-[1.7px] rounded-sm dark:hover:text-black hover:text-white border-gray-900 dark:border-gray-200 py-2 px-5 hover:bg-gray-900 dark:hover:bg-gray-100 "}
                                             onClick={async () => {
                                                 const exportComponentAsPNG = (await import('react-component-export-image')).exportComponentAsPNG
                                                 if (ref) {
@@ -238,7 +261,7 @@ const Home = () => {
                                                     })
                                                 }
                                             }}>
-                                            Generate Backgrounds
+                                            Generate Background
                                         </button>
                                     </div>
                                 </>)
@@ -258,7 +281,7 @@ const Home = () => {
                         <button
                             onClick={() => setShowSpecVerseModal(true)}
                             className="font-light border-[1.7px] rounded-sm dark:hover:text-black hover:text-white border-gray-900 dark:border-gray-200 py-2 px-5 hover:bg-gray-900 dark:hover:bg-gray-100 ">
-                            Choose a specific Aya 🕌
+                            Choose a specific Aya (<i>still in Beta</i>) 🕌
                         </button>
                     </div>
                 </section>
@@ -309,13 +332,13 @@ const Home = () => {
             {specVerseNum && !loadingVerse && specVerse &&
                 <div className={"-z-50 absolute bottom-[-1336px] right-[-1822px]"}>
                     <div ref={ref}
-                         className={'w-[1822px] h-[1336px] text-white font-amiri  text-[30px] text-center flex items-center flex-col justify-center bg-gradient-to-br from-violet-500 to-blue-50 '}>
+                         className={'w-[1822px] h-[1336px] px-[150px] text-black font-amiri  text-[30px] text-center flex items-center flex-col gap-[30px] justify-center bg-gradient-to-br from-violet-500 to-blue-50 '}>
                         <div
-                            className={''}>
+                            className={'bg-transparent'}>
                             {specVerse[specSuraNum + ":" + specVerseNum]?.verseAr}
                         </div>
                         <div
-                            className={''}>
+                            className={'bg-transparent'}>
                             {specVerse[specSuraNum + ":" + specVerseNum]?.verseEn}
                         </div>
                     </div>
