@@ -1,5 +1,5 @@
 import Head from "next/head";
-import {createRef, ReactInstance, RefObject, useEffect, useState} from "react";
+import {createRef, useEffect, useState} from "react";
 import Text from "../components/core/Text";
 import Title from "../components/core/Title";
 import VerseButton from "../components/Layout/VerseButton";
@@ -17,12 +17,8 @@ import useSetSpecVerseNum from "../operations/useSetSpecVerseNum";
 import useSetSpecSuraNum from "../operations/useSetSpecSuraNum";
 import useSetSpecVerse from "../operations/useSetSpecVerse";
 
-//import {exportComponentAsPNG} from "react-component-export-image";
-
-import dynamic from "next/dynamic";
-
 const Home = () => {
-    //TODO reduce this file's size < 100 lines
+    //TODO reduce this file's size
     const [showVerseModal, setShowVerseModal] = useState(false)
     const [showSpecVerseModal, setShowSpecVerseModal] = useState(false)
     const [activeVerseId, setActiveVerseId] = useState("999:1-2")//or any Aya, basically
@@ -141,23 +137,8 @@ const Home = () => {
         }
     }, [specSuraNum, specVerseNum])
 
-    const [foo, setFoo] = useState<any>(() => () => {
-    });
-    useEffect(() => {
-        setFoo(() =>
-            async (ref: RefObject<ReactInstance>, specSuraNum: { toString: () => string; }, specVerseNum: { toString: () => string; }) => {
-                const exportComponentAsPNG = (await import('react-component-export-image')).exportComponentAsPNG
-                ref &&
-                exportComponentAsPNG(ref, {
-                    fileName: "Ayat Wallpaper " + specSuraNum?.toString() + " " + specVerseNum?.toString(),
-                }).catch(
-                    (err) => console.log(err)
-                )
-            })
-        return
-    }, [])
     return (
-        <div className="font-poppins">
+        <div className="font-poppins overflow-hidden relative">
             <Head>
                 <title>Ayats Wallpapers 🕋</title>
                 <meta
@@ -243,27 +224,19 @@ const Home = () => {
                                             {specVerse[specSuraNum + ":" + specVerseNum]?.verseEn}
                                         </div>
                                     </div>
-                                    <div ref={ref}
-                                         className={'-z-50 w-[1822px] h-[1336px] text-white font-amiri  text-[30px] text-center flex items-center flex-col justify-center bg-gradient-to-br from-violet-500 to-blue-50 '}>
-                                        <div
-                                            className={''}
-                                            hidden={!specVerseNum}>
-                                            {specVerse[specSuraNum + ":" + specVerseNum]?.verseAr}
-                                        </div>
-                                        <div
-                                            className={''}
-                                            hidden={!specVerseNum}>
-                                            {/*TODO add a spinner while loading*/}
-                                            {specVerse[specSuraNum + ":" + specVerseNum]?.verseEn}
-                                        </div>
-                                    </div>
-
                                     <div>
                                         <button
                                             className={"bg-blend-soft-light bg-pink-400 p-4 rounded-md hover:bg-pink-800 text-gray-800 hover:text-gray-200"}
-                                            onClick={() => {
-                                                foo(ref, specSuraNum, specVerseNum)
-                                                return
+                                            onClick={async () => {
+                                                const exportComponentAsPNG = (await import('react-component-export-image')).exportComponentAsPNG
+                                                if (ref) {
+                                                    exportComponentAsPNG(ref, {
+                                                        fileName: "Ayat Wallpaper " + specSuraNum?.toString() + " " + specVerseNum?.toString(),
+                                                    }).catch(
+                                                        (err) => console.log('Error in exportComponentAsPNG: ', err)
+                                                    ).finally(() => {
+                                                    })
+                                                }
                                             }}>
                                             Generate Backgrounds
                                         </button>
@@ -333,9 +306,24 @@ const Home = () => {
                         Thanks </p>
                 </section>
             </main>
+            {specVerseNum && !loadingVerse && specVerse &&
+                <div className={"-z-50 absolute bottom-[-1336px] right-[-1822px]"}>
+                    <div ref={ref}
+                         className={'w-[1822px] h-[1336px] text-white font-amiri  text-[30px] text-center flex items-center flex-col justify-center bg-gradient-to-br from-violet-500 to-blue-50 '}>
+                        <div
+                            className={''}>
+                            {specVerse[specSuraNum + ":" + specVerseNum]?.verseAr}
+                        </div>
+                        <div
+                            className={''}>
+                            {specVerse[specSuraNum + ":" + specVerseNum]?.verseEn}
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     );
 }
 
 
-export default dynamic(Promise.resolve(Home), {ssr: false});
+export default Home;
