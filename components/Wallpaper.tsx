@@ -9,7 +9,6 @@ import Modal from './Modal';
 type ImageProps = {
     alt: string;
     imgSrc: StaticImageData | string | any;
-    activeVerse: number
     ayaData?: [],
 
 };
@@ -24,16 +23,15 @@ function Wallpaper({ imgSrc, alt, ayaData }: ImageProps) {
 
     const downloadWalpaper = async () => {
         try {
-            const responce = await fetch("/api/wallpaper", {
+            const response = await fetch("/api/wallpaper", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     id: alt,
                 }),
             });
-            if (responce.ok) {
-                mutate("/api/wallpaper");
-
+            if (response.ok) {
+                await mutate("/api/wallpaper");
             }
         } catch (error) {
             console.log("there was an error submitting", error);
@@ -79,7 +77,7 @@ function Wallpaper({ imgSrc, alt, ayaData }: ImageProps) {
                             } } download='wallpaper' href={ `/wallpapers/${alt}.zip` } className=' outline-none bg-gray-300 dark:text-black p-2 rounded-md text-xs font-semibold group-hover:text-[#04ade0]  tranistion duration-300'>
                                 <div className='flex items-center space-x-4'>
                                     <span>
-                                        Click to Downloads
+                                        Click to Download
                                     </span>
                                     <DownloadIcon />
                                 </div>
